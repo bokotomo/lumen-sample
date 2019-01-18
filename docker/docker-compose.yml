@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb:10.3
+    ports:
+      - "3399:3306"
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+      MYSQL_DATABASE: dev
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8088:80"
+    links:
+      - app
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+  app:
+    build: ./lumen
+    tty: true
+    volumes:
+      - ${APP_CODE_PATH_HOST}:/app
+    depends_on:
+      - db
+
