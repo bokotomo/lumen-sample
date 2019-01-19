@@ -15,4 +15,6 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('log', 'UserLogController@store');
+$router->post('logs', 'UserLogController@store');
+$router->get('logs', 'UserLogController@index');
+$router->get('logs/today', 'UserLogController@getLogToday');
