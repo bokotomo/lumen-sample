@@ -9,10 +9,14 @@ use App\Models\LogsAndroidUsers;
 use Exception;
 use Carbon\Carbon;
 use DB;
+use App\Entitys\LogEntity;
+use Illuminate\Support\Collection;
+
 
 class LogsAndroidUsersRepository
 {
     private $logsAndroidUsers;
+    private $entity;
 
     /**
      * Create a new controller instance.
@@ -22,9 +26,20 @@ class LogsAndroidUsersRepository
     public function __construct(LogsAndroidUsers $logsAndroidUsers)
     {
         $this->logsAndroidUsers = $logsAndroidUsers;
+        $this->entity = function (LogsAndroidUsers $logsAndroidUsers) {
+            $logEntity = new LogEntity($logsAndroidUsers);
+
+            return [
+              'user_id' => $logEntity->getUserId(),
+              'memo' => $logEntity->getMemo(),
+              'version' => $logEntity->getVersion(),
+              'language' => $logEntity->getLanguage(),
+              'date' => $logEntity->getDate(),
+            ];
+        };
     }
 
-    public function getAll(): object
+    public function getAll(): Collection
     {
         $select = [
             'user_id',
@@ -34,10 +49,12 @@ class LogsAndroidUsersRepository
             DB::raw('DATE_FORMAT(created_at, "%Y-%m-%d %H-%i-%s") as date')
         ];
 
-        return $this->logsAndroidUsers::select($select)->get();
+        return $this->logsAndroidUsers::select($select)
+            ->get()
+            ->map($this->entity);
     }
 
-    public function getToday(): object
+    public function getToday(): Collection
     {
         $select = [
             'user_id',
@@ -49,7 +66,8 @@ class LogsAndroidUsersRepository
 
         return $this->logsAndroidUsers::select($select)
             ->whereDate('created_at', Carbon::today())
-            ->get();
+            ->get()
+            ->map($this->entity);
     }
 
     public function store(Request $request): bool

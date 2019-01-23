@@ -31,6 +31,7 @@ class UserLogController extends Controller
         $res = [
             'logs' => $logs
         ];
+
         return response($res, 200, $this->headers);
     }
 
@@ -52,7 +53,6 @@ class UserLogController extends Controller
         $this->validate($request, [
             'type' => 'required|max:10',
         ]);
-
         $isStored = $this->userLogsService->storeLog($request);
         $res = [
             'isStored' => $isStored

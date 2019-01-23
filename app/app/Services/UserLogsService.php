@@ -36,7 +36,7 @@ class UserLogsService
         } elseif ($request->type === 'android') {
             return $this->logsAndroidUsersRepository->getAll();
         } else {
-            return [];
+            return (object)[];
         }
     }
 
@@ -47,7 +47,7 @@ class UserLogsService
         } elseif ($request->type === 'android') {
             return $this->logsAndroidUsersRepository->getToday();
         } else {
-            return [];
+            return (object)[];
         }
     }
 
