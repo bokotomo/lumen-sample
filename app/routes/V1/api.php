@@ -11,10 +11,9 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
-$router->post('logs', 'UserLogController@store');
+/**
+ * Log API
+ */
 $router->get('logs', 'UserLogController@index');
 $router->get('logs/today', 'UserLogController@getLogToday');
+$router->post('logs', 'UserLogController@store');
