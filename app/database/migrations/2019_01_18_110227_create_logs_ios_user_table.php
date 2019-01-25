@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLogsIosUsersTable extends Migration
+class CreateLogsIosUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -30,6 +30,6 @@ class CreateLogsIosUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log_ios_users');
+        Schema::dropIfExists('logs_ios_users');
     }
 }
