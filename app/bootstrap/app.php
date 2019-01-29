@@ -97,7 +97,7 @@ $app->router->group([
     'namespace' => 'App\Http\Controllers',
     'prefix' => 'v1',
 ], function ($router) {
-    require __DIR__.'/../routes/V1/api.php';
+    require __DIR__.'/../routes/v1/api.php';
 });
 
 return $app;

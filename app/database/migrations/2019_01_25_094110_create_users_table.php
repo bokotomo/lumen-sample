@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLogsIosUsersTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateLogsIosUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('logs_ios_users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id', 64);
-            $table->string('memo', 64);
-            $table->string('version', 10);
-            $table->string('language', 64);
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateLogsIosUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logs_ios_users');
+        Schema::dropIfExists('users');
     }
 }
