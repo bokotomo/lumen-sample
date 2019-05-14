@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserLogsService;
+use App\Http\Responders\UserLogIndexResponder;
 
 class UserLogController extends Controller
 {
@@ -21,18 +22,17 @@ class UserLogController extends Controller
         $this->userLogsService = $userLogsService;
     }
 
-    public function index(Request $request)
-    {
+    public function index(
+      Request $request,
+      PlatformTypeIndexResponder $responder
+    ) {
         $this->validate($request, [
             'type' => 'required|max:10',
         ]);
 
         $logs= $this->userLogsService->getLog($request);
-        $res = [
-            'logs' => $logs
-        ];
 
-        return response($res, 200, $this->headers);
+        return $responder($logs);
     }
 
     public function getLogToday(Request $request)

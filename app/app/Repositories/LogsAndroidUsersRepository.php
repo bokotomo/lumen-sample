@@ -30,11 +30,11 @@ class LogsAndroidUsersRepository
             $logEntity = new LogEntity($logsAndroidUsers);
 
             return [
-              'user_id' => $logEntity->getUserId(),
-              'memo' => $logEntity->getMemo(),
-              'version' => $logEntity->getVersion(),
-              'language' => $logEntity->getLanguage(),
-              'date' => $logEntity->getDate(),
+                'user_id' => $logEntity->getUserId(),
+                'memo' => $logEntity->getMemo(),
+                'version' => $logEntity->getVersion(),
+                'language' => $logEntity->getLanguage(),
+                'date' => $logEntity->getDate(),
             ];
         };
     }
