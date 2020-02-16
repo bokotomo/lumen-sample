@@ -35,9 +35,8 @@ class UserLogsService
             return $this->logsIosUsersRepository->getAll();
         } elseif ($request->type === 'android') {
             return $this->logsAndroidUsersRepository->getAll();
-        } else {
-            return (object)[];
         }
+        return (object)[];
     }
 
     public function getLogToday(Request $request): object
@@ -46,19 +45,27 @@ class UserLogsService
             return $this->logsIosUsersRepository->getToday();
         } elseif ($request->type === 'android') {
             return $this->logsAndroidUsersRepository->getToday();
-        } else {
-            return (object)[];
         }
+        return (object)[];
     }
 
     public function storeLog(Request $request): bool
     {
         if ($request->type === 'ios') {
-            return $this->logsIosUsersRepository->store($request);
+            return $this->logsIosUsersRepository->store(
+                $request->user_id,
+                $request->memo,
+                $request->language,
+                $request->version,
+            );
         } elseif ($request->type === 'android') {
-            return $this->logsAndroidUsersRepository->store($request);
-        } else {
-            return false;
+            return $this->logsAndroidUsersRepository->store(
+                $request->user_id,
+                $request->memo,
+                $request->language,
+                $request->version,
+            );
         }
+        return false;
     }
 }

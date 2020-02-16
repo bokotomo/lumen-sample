@@ -12,6 +12,8 @@ class LogsAndroidUsers extends Model
      * @var array
      */
     protected $fillable = [
-        'memo', 'version', 'language'
+        'memo',
+        'version',
+        'language',
     ];
 }

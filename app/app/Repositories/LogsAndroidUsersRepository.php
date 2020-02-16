@@ -70,15 +70,14 @@ class LogsAndroidUsersRepository
             ->map($this->entity);
     }
 
-    public function store(Request $request): bool
+    public function store(int $userId, string $memo, string $language, string $version): bool
     {
         try{
-            $this->logsAndroidUsers->user_id = $request->user_id;
-            $this->logsAndroidUsers->memo = $request->memo;
-            $this->logsAndroidUsers->language = $request->language;
-            $this->logsAndroidUsers->version = $request->version;
+            $this->logsAndroidUsers->user_id = $userId;
+            $this->logsAndroidUsers->memo = $memo;
+            $this->logsAndroidUsers->language = $language;
+            $this->logsAndroidUsers->version = $version;
             $this->logsAndroidUsers->save();
-
             return true;
         } catch(Exception $e) {
             return false;

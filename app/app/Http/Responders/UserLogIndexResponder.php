@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Responders\UserLogs;
+namespace App\Http\Responders\UserLog;
 
-use Illuminate\Http\JsonResponse;
+//use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class UserLogIndexResponder
@@ -11,10 +11,11 @@ class UserLogIndexResponder
      * @param array
      * @return JsonResponse
      */
-    public function __invoke(array $logs): JsonResponse
+    public function __invoke()
     {
-        return response([
-            'logs' => $logs
-        ], 200, $this->headers);
+        return 1;
+        // return response([
+        //     'logs' => $logs
+        // ], 200, $this->headers);
     }
 }
